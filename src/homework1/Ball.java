@@ -7,9 +7,9 @@ public class Ball extends Sprites {
 
     Random random = new Random();
 
-    private float speedX;
-    private float speedY;
-    private final Color color;
+    private float speedX; // Скорость по X
+    private float speedY; // Скорость по Y
+    private final Color color; // цвет
 
     Ball() {
         halfHeight = 20 + (float) (Math.random() * 50f);

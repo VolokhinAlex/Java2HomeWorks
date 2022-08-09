@@ -82,6 +82,9 @@ public class MainCircles extends JFrame {
     }
 
     private Sprites[] removeBall(Ball ball) {
+        if (sprites.length == 0) {
+            return sprites;
+        }
         Sprites[] countSprites = new Sprites[sprites.length - 1];
         System.arraycopy(sprites, 0, countSprites, 0, sprites.length - 1);
         return countSprites;
