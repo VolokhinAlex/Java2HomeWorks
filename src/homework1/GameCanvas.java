@@ -28,7 +28,7 @@ public class GameCanvas extends JPanel {
     }
 
     /**
-     * @return - левая граница холста.
+     * @return - Р»РµРІР°СЏ РіСЂР°РЅРёС†Р° С…РѕР»СЃС‚Р°.
      */
 
     public int getLeft() {
@@ -36,7 +36,7 @@ public class GameCanvas extends JPanel {
     }
 
     /**
-     * @return - правая граница холста.
+     * @return - РїСЂР°РІР°СЏ РіСЂР°РЅРёС†Р° С…РѕР»СЃС‚Р°.
      */
 
     public int getRight() {
@@ -44,7 +44,7 @@ public class GameCanvas extends JPanel {
     }
 
     /**
-     * @return - верхняя граница холста.
+     * @return - РІРµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р° С…РѕР»СЃС‚Р°.
      */
 
     public int getTop() {
@@ -52,7 +52,7 @@ public class GameCanvas extends JPanel {
     }
 
     /**
-     * @return - нижняя граница холста.
+     * @return - РЅРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р° С…РѕР»СЃС‚Р°.
      */
 
     public int getBottom() {
