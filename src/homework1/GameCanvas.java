@@ -27,17 +27,33 @@ public class GameCanvas extends JPanel {
         repaint();
     }
 
+    /**
+     * @return - левая граница холста.
+     */
+
     public int getLeft() {
         return 0;
     }
+
+    /**
+     * @return - правая граница холста.
+     */
 
     public int getRight() {
         return getWidth() - 1;
     }
 
+    /**
+     * @return - верхняя граница холста.
+     */
+
     public int getTop() {
         return 0;
     }
+
+    /**
+     * @return - нижняя граница холста.
+     */
 
     public int getBottom() {
         return getHeight() - 1;

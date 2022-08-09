@@ -4,6 +4,11 @@ import java.awt.*;
 import java.util.Random;
 
 public class BackGround extends Sprites {
+
+    /**
+     * Класс изменяет цвет канвы в зависимости от времени.
+     */
+
     Random random = new Random();
 
     private Color color;
