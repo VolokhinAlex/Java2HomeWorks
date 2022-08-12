@@ -1,6 +1,6 @@
 package homework2;
 
-public class ArrayIndexOutOfBoundsException extends RuntimeException {
+public class ArrayIndexOutOfBoundsException extends Exception {
 
     public ArrayIndexOutOfBoundsException(String message) {
         super(message);

@@ -17,16 +17,15 @@ public class Main {
     private static String[][] stringToArray;
 
     public static void main(String[] args) {
-
         try {
             convertStringToArray(str);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ArrayIndexOutOfBoundsException("The size of the matrix should be 4x4!");
+            e.printStackTrace();
         }
         try {
             System.out.println("The sum of the array numbers divided by 2 = " + operationWithArray());
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("A string cannot be converted to a number.");
+            e.printStackTrace();
         }
 
     }
@@ -58,7 +57,7 @@ public class Main {
             String[] arr3 = string[i].split(" ");
             for (int j = 0; j < arr3.length; j++) {
                 if (!isNumeric(arr3[j])) {
-                    throw new NumberFormatException();
+                    throw new NumberFormatException("A string cannot be converted to a number.");
                 }
                 sum = sum + Integer.parseInt(arr3[j]);
                 arr[i][j] = Integer.parseInt(arr3[j]);
