@@ -20,34 +20,37 @@ public class Main {
 
         try {
             convertStringToArray(str);
-        } catch (MyException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new ArrayIndexOutOfBoundsException("The size of the matrix should be 4x4!");
         }
         try {
             System.out.println("The sum of the array numbers divided by 2 = " + operationWithArray());
-        } catch (MyException e) {
+        } catch (NumberFormatException e) {
             throw new NumberFormatException("A string cannot be converted to a number.");
         }
 
     }
 
-    private static void convertStringToArray(String str) throws MyException {
+    private static void convertStringToArray(String str) throws ArrayIndexOutOfBoundsException {
+
         String[] string = str.split("\n");
         stringToArray = new String[string.length][string.length];
         for (int i = 0; i < string.length; i++) {
             String[] arr = string[i].split(" ");
             for (int j = 0; j < arr.length; j++) {
                 if (arr.length != 4) {
-                    throw new MyException("The size of the matrix should be 4x4!");
+                    throw new ArrayIndexOutOfBoundsException("The size of the matrix should be 4x4!");
                 }
                 stringToArray[i][j] = arr[j];
                 System.out.print(stringToArray[i][j] + " ");
             }
             System.out.println();
         }
+
     }
 
-    private static int operationWithArray() throws MyException {
+    private static int operationWithArray() throws NumberFormatException {
+
         String[] string = str.split("\n");
         int sum = 0;
         int[][] arr = new int[string.length][string.length];
@@ -55,13 +58,14 @@ public class Main {
             String[] arr3 = string[i].split(" ");
             for (int j = 0; j < arr3.length; j++) {
                 if (!isNumeric(arr3[j])) {
-                    throw new MyException();
+                    throw new NumberFormatException();
                 }
                 sum = sum + Integer.parseInt(arr3[j]);
                 arr[i][j] = Integer.parseInt(arr3[j]);
             }
         }
         return sum / 2;
+
     }
 
     public static boolean isNumeric(String str) {
