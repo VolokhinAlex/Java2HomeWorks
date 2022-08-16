@@ -13,62 +13,80 @@ public class Main {
      * 5. * Написать собственные классы исключения для каждого из случаев. RuntimeException
      */
 
-    private static String str = "10 3 1 2\n2 3 2 2\n5 6 7 1\n300 3 1 0";
-    private static String[][] stringToArray;
-
     public static void main(String[] args) {
+        String strMatrix = "10 3 1 2\n2 3 2 2\n5 6 7 1\n300 3 1 0";
+        String[][] stringToArray;
+
         try {
-            convertStringToArray(str);
+            stringToArray = convertStringToArray(strMatrix);
+            System.out.println("The sum of the array numbers divided by 2 = " + operationWithArray(stringToArray));
         } catch (ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
-        }
-        try {
-            System.out.println("The sum of the array numbers divided by 2 = " + operationWithArray());
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-
     }
 
-    private static void convertStringToArray(String str) throws ArrayIndexOutOfBoundsException {
+    /**
+     * Метод преобразует переданную строку в двумерный массив значений.
+     * @param strForConvert - строка для преобразования в двумерный массив
+     * @return - заполненный двумерный массив.
+     * @throws ArrayIndexOutOfBoundsException - исключение при выходе за пределы массива, в этом случае размер массива должен быть 4x4
+     */
 
-        String[] string = str.split("\n");
-        stringToArray = new String[string.length][string.length];
-        for (int i = 0; i < string.length; i++) {
-            String[] arr = string[i].split(" ");
-            for (int j = 0; j < arr.length; j++) {
-                if (arr.length != 4) {
+    private static String[][] convertStringToArray(String strForConvert) throws ArrayIndexOutOfBoundsException {
+        String[] additionalArrayForConvert = strForConvert.split("\n");
+        String[][] stringToArray = new String[additionalArrayForConvert.length][additionalArrayForConvert.length];
+        for (int i = 0; i < additionalArrayForConvert.length; i++) {
+            String[] additionalArray = additionalArrayForConvert[i].split(" ");
+            for (int j = 0; j < additionalArray.length; j++) {
+                if (additionalArray.length != 4) {
                     throw new ArrayIndexOutOfBoundsException("The size of the matrix should be 4x4!");
                 }
-                stringToArray[i][j] = arr[j];
+                stringToArray[i][j] = additionalArray[j];
                 System.out.print(stringToArray[i][j] + " ");
             }
             System.out.println();
         }
-
+        return stringToArray;
     }
 
-    private static int operationWithArray() throws NumberFormatException {
+    /**
+     * Метод суммирует все числа двумерного массива и делит их на 2, после чего возвращает результат деления.
+     * @param arrayString - двумерный массив заполненный строкой.
+     * @return - сумма чисел массива деленная на 2
+     * @throws NumberFormatException - ошибка преобразования строки в число.
+     */
 
-        String[] string = str.split("\n");
-        int sum = 0;
-        int[][] arr = new int[string.length][string.length];
-        for (int i = 0; i < arr.length; i++) {
-            String[] arr3 = string[i].split(" ");
-            for (int j = 0; j < arr3.length; j++) {
-                if (!isNumeric(arr3[j])) {
+    private static int operationWithArray(String[][] arrayString) throws NumberFormatException {
+        int sumArray = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (isNumeric(arrayString[i][j])) {
+                    sumArray += Integer.parseInt(arrayString[i][j]);
+                } else {
                     throw new NumberFormatException("A string cannot be converted to a number.");
                 }
-                sum = sum + Integer.parseInt(arr3[j]);
-                arr[i][j] = Integer.parseInt(arr3[j]);
             }
         }
-        return sum / 2;
-
+        return sumArray / 2;
     }
 
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
+    /**
+     * Метод преобразует все элементы массива в числа int и возвращает результат, возможно это или нет.
+     * @param strMatrix - строка для преобразования
+     * @return - True: если получилось преобразовать, иначе False
+     * @throws java.lang.NumberFormatException - ошибка преобразования строки в число.
+     */
+
+    private static boolean isNumeric(String strMatrix) throws java.lang.NumberFormatException {
+        try {
+            Integer.parseInt(strMatrix);
+            return true;
+        } catch (java.lang.NumberFormatException e) {
+            return false;
+        }
     }
+
 
 }
