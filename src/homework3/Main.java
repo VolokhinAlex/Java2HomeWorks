@@ -9,13 +9,13 @@ public class Main {
 
     /**
      * Дз:
-     * 1. Создать массив с набором слов (20-30 слов, должны встречаться повторяющиеся); +
-     * - Найти список слов, из которых состоит текст (Дубликаты не считать); +
-     * - Посчитать сколько раз встречается каждое слово (использовать HashMap); +
-     * 2. Написать простой класс PhoneBook(внутри использовать HashMap); +
-     * - В качестве ключа использовать фамилию; +
-     * - В каждой записи всего два поля: phone, e-mail; + -
-     * - Отдельно метод для поиска номера по фамилии(ввели фамилию, получили ArrayList телефонов), +
+     * 1. Создать массив с набором слов (20-30 слов, должны встречаться повторяющиеся);
+     * - Найти список слов, из которых состоит текст (Дубликаты не считать);
+     * - Посчитать сколько раз встречается каждое слово (использовать HashMap);
+     * 2. Написать простой класс PhoneBook(внутри использовать HashMap);
+     * - В качестве ключа использовать фамилию;
+     * - В каждой записи всего два поля: phone, e-mail;
+     * - Отдельно метод для поиска номера по фамилии(ввели фамилию, получили ArrayList телефонов),
      * и отдельно метод для поиска e-mail по фамилии. Следует учесть, что под одной фамилией может быть несколько
      * записей. Итого должно получиться 3 класса Main, PhoneBook, Person.
      */
@@ -41,18 +41,28 @@ public class Main {
         for (Map.Entry<String, Integer> entry : countWord.entrySet()) {
             System.out.print(entry.getKey() + ": " + entry.getValue() + " time(s), ");
         }
-
         System.out.println("\n***********************************************");
-        PhoneBook phoneBook = new PhoneBook();
 
+        PhoneBook phoneBook = new PhoneBook();
         phoneBook.fillPhoneBook("Петров", "+7 (212) 222 55 77", "petrov1@gmail.com");
         phoneBook.fillPhoneBook("Петров", "+7 (290) 245 15 22", "petrov90@gmail.com");
+        phoneBook.fillPhoneBook("Петров", "+7 (979) 573 17 99", "petrov90@gmail.com");
+        phoneBook.fillPhoneBook("Петров", "+7 (952) 863 23 36", "petrov90@gmail.com");
         phoneBook.fillPhoneBook("Иванов", "+7 (999) 576 23 77", "ivanov31@gmail.com");
+        phoneBook.fillPhoneBook("Попов", "+7 (932) 823 42 65", "popov212@gmail.com");
+        phoneBook.fillPhoneBook("Иванов", "+7 (999) 576 23 77", "catsIvan@gmail.com");
+        phoneBook.fillPhoneBook("Попов", "+7 (932) 823 42 65", "popov212@gmail.com");
         phoneBook.fillPhoneBook("Сидоров", "+7 (300) 561 20 09", "sidorov42@gmail.com");
+        phoneBook.fillPhoneBook("Попов", "+7 (932) 823 42 65", "popov212@gmail.com");
+        phoneBook.fillPhoneBook("Попов", "+7 (976) 091 11 53", "popov42@gmail.com");
         phoneBook.printPhoneBook();
+
         System.out.println("***********************************************");
 
-        phoneBook.searchPhoneByLastName("Петров");
         phoneBook.searchEmailByLastName("Иванов");
+        phoneBook.searchPhoneByLastName("Петров");
+
+        phoneBook.searchEmailByLastName("Петров");
+        phoneBook.searchEmailByLastName("Попов");
     }
 }

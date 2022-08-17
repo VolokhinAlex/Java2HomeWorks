@@ -11,14 +11,18 @@ public class PhoneBook {
 
     /**
      * The method adds items to the phone book.
-     * @param lastname - lastname.
-     * @param phone    - number.
-     * @param email    - email.
+     *
+     * @param lastname - lastname - Keys.
+     * @param phone    - number - value.
+     * @param email    - email - value.
      */
 
     public void fillPhoneBook(String lastname, String phone, String email) {
         if (!phoneBook.containsKey(lastname)) {
             personInfo = new ArrayList<>();
+        }
+        if (phoneBook.containsKey(lastname)) {
+            personInfo = phoneBook.get(lastname);
         }
         personInfo.add(new Person(phone, email));
         phoneBook.put(lastname, personInfo);
@@ -37,7 +41,8 @@ public class PhoneBook {
 
     /**
      * A method for searching for a number by lastname.
-     * @param lastname - lastname.
+     *
+     * @param lastname - lastname - Keys.
      */
 
     public void searchPhoneByLastName(String lastname) {
@@ -53,7 +58,8 @@ public class PhoneBook {
 
     /**
      * A method for searching for mail by lastname.
-     * @param lastname - lastname
+     *
+     * @param lastname - lastname - Keys.
      */
 
     public void searchEmailByLastName(String lastname) {
