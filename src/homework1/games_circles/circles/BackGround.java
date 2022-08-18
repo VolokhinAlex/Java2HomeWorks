@@ -1,7 +1,7 @@
 package homework1.games_circles.circles;
 
-import lesson2.games_circles.common.GameCanvas;
-import lesson2.games_circles.common.GameObject;
+import homework1.games_circles.common.GameCanvas;
+import homework1.games_circles.common.GameObject;
 
 import java.awt.*;
 import java.util.Random;
