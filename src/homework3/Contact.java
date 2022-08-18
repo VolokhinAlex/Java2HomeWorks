@@ -1,11 +1,11 @@
 package homework3;
 
-public class Person {
+public class Contact {
 
     private String phone;
     private String email;
 
-    Person(String phone, String email) {
+    Contact(String phone, String email) {
         this.phone = phone;
         this.email = email;
     }

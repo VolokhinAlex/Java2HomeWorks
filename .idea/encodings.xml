@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/homework1/BackGround.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework1/Ball.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework1/GameCanvas.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework1/MainCircles.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework1/Sprites.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework1/homework_manual/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework2/ArrayIndexOutOfBoundsException.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework2/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework3/PhoneBook.java" charset="UTF-8" />
+  </component>
+</project>

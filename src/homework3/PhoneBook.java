@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class PhoneBook {
 
-    private HashMap<String, ArrayList<Person>> phoneBook = new HashMap<>();
-    private ArrayList<Person> personInfo;
+    private HashMap<String, ArrayList<Contact>> phoneBook = new HashMap<>();
+    private ArrayList<Contact> personInfo;
 
     /**
      * The method adds items to the phone book.
@@ -24,7 +24,7 @@ public class PhoneBook {
         if (phoneBook.containsKey(lastname)) {
             personInfo = phoneBook.get(lastname);
         }
-        personInfo.add(new Person(phone, email));
+        personInfo.add(new Contact(phone, email));
         phoneBook.put(lastname, personInfo);
     }
 
@@ -34,7 +34,7 @@ public class PhoneBook {
 
     public void printPhoneBook() {
         System.out.println("All contacts of the phone book");
-        for (Map.Entry<String, ArrayList<Person>> entry : phoneBook.entrySet()) {
+        for (Map.Entry<String, ArrayList<Contact>> entry : phoneBook.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue().toString());
         }
     }
@@ -47,9 +47,9 @@ public class PhoneBook {
 
     public void searchPhoneByLastName(String lastname) {
         System.out.println("List of all numbers with the lastname: " + lastname);
-        for (Map.Entry<String, ArrayList<Person>> entry : phoneBook.entrySet()) {
+        for (Map.Entry<String, ArrayList<Contact>> entry : phoneBook.entrySet()) {
             if (lastname.equals(entry.getKey())) {
-                for (Person phones : entry.getValue()) {
+                for (Contact phones : entry.getValue()) {
                     System.out.println(phones.getPhone());
                 }
             }
@@ -64,9 +64,9 @@ public class PhoneBook {
 
     public void searchEmailByLastName(String lastname) {
         System.out.println("List of all emails with the lastname: " + lastname);
-        for (Map.Entry<String, ArrayList<Person>> entry : phoneBook.entrySet()) {
+        for (Map.Entry<String, ArrayList<Contact>> entry : phoneBook.entrySet()) {
             if (lastname.equals(entry.getKey())) {
-                for (Person emails : entry.getValue()) {
+                for (Contact emails : entry.getValue()) {
                     System.out.println(emails.getEmail());
                 }
             }
