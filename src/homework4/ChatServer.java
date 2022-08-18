@@ -9,7 +9,7 @@ public class ChatServer {
     }
 
     public void stop() {
-        System.out.println("Server Stopperd");
+        System.out.println("Server Stopped");
     }
 
 }

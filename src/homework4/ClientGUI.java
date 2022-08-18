@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +15,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private static final int HEIGHT = 300;
 
     private final JTextArea log = new JTextArea();
-    private final JPanel panelTop = new JPanel(new GridLayout(2,3));
+    private final JPanel panelTop = new JPanel(new GridLayout(2, 3));
     private final JTextField tfIpAddress = new JTextField("127.0.0.1");
     private final JTextField tfPort = new JTextField("1111");
     private final JCheckBox cbAlwaysOnTop = new JCheckBox("Always on top");
@@ -40,9 +39,9 @@ public class ClientGUI extends JFrame implements ActionListener,
     }
 
     private ClientGUI() {
-        Thread.setDefaultUncaughtExceptionHandler(this); // Œ·‡·‡Ú˚‚‡ÂÚ ËÒÍÎ˛˜ÂÌËˇ
+        Thread.setDefaultUncaughtExceptionHandler(this); // –û–±—Ä–∞–±–∞—Ç—ã–≤–∞–µ—Ç –∏—Å–∫–ª—é—á–µ–Ω–∏—è
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(WIDTH,HEIGHT);
+        setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         log.setEditable(false);
         JScrollPane scrollLog = new JScrollPane(log);
@@ -78,9 +77,9 @@ public class ClientGUI extends JFrame implements ActionListener,
         if (src == cbAlwaysOnTop) {
             setAlwaysOnTop(cbAlwaysOnTop.isSelected());
         } else if (src == btnSend || src == tfMessage) {
-            log.append(tfMessage.getText() + "\n");
+            log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
             handlingRecordExclusion();
-        }  else {
+        } else {
             throw new RuntimeException("Undefined source: " + src);
         }
     }
@@ -90,7 +89,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         e.printStackTrace();
         StackTraceElement[] ste = e.getStackTrace();
         String errorMessage = String.format("Exception in thread \"%s\" %s: %s\n\tat %s",
-                t.getName(),e.getClass().getCanonicalName(), e.getMessage(), ste[0]);
+                t.getName(), e.getClass().getCanonicalName(), e.getMessage(), ste[0]);
         JOptionPane.showMessageDialog(this, errorMessage, "Exception", JOptionPane.ERROR_MESSAGE);
         System.exit(1);
     }
@@ -98,6 +97,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     /**
      * The method creates a new log file, in which after each message there is a record.
      * Created a file named LYearMonthDay.log (Example: L20220818.log)
+     *
      * @throws IOException - file exceptions.
      */
 
@@ -116,10 +116,9 @@ public class ClientGUI extends JFrame implements ActionListener,
     private void handlingRecordExclusion() {
         try {
             writingLogToFile();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
-
 
 }

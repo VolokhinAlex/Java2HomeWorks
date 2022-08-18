@@ -22,12 +22,12 @@ public class ServerGUI extends JFrame implements ActionListener, Thread.Uncaught
             public void run() {
                 new ServerGUI(); // Event Queue
             }
-        }); // Вызвать позже(Новый поток) Кладем в очередь событий
+        }); // Р’С‹Р·РІР°С‚СЊ РїРѕР·Р¶Рµ(РќРѕРІС‹Р№ РїРѕС‚РѕРє) РљР»Р°РґРµРј РІ РѕС‡РµСЂРµРґСЊ СЃРѕР±С‹С‚РёР№
 
     }
 
     private ServerGUI() {
-        Thread.setDefaultUncaughtExceptionHandler(this); // Обрабатывает исключения
+        Thread.setDefaultUncaughtExceptionHandler(this); // РћР±СЂР°Р±Р°С‚С‹РІР°РµС‚ РёСЃРєР»СЋС‡РµРЅРёСЏ
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(POS_X, POS_Y, WIDTH, HEIGHT);
         setResizable(false);

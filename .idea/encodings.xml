@@ -10,5 +10,8 @@
     <file url="file://$PROJECT_DIR$/src/homework2/ArrayIndexOutOfBoundsException.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/homework2/Main.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/homework3/PhoneBook.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework4/ChatServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework4/ClientGUI.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/homework4/ServerGUI.java" charset="UTF-8" />
   </component>
 </project>
