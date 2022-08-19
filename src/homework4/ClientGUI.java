@@ -126,8 +126,9 @@ public class ClientGUI extends JFrame implements ActionListener,
      */
 
     private void printMessageToLog() {
-        if (tfMessage.getText().equals("")) return;
-        log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+        String message = tfMessage.getText();
+        if (message.equals("") || message.trim().length() == 0) return;
+        log.append(tfLogin.getText() + ": " + message + "\n");
     }
 
 }
