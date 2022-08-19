@@ -77,8 +77,8 @@ public class ClientGUI extends JFrame implements ActionListener,
         if (src == cbAlwaysOnTop) {
             setAlwaysOnTop(cbAlwaysOnTop.isSelected());
         } else if (src == btnSend || src == tfMessage) {
-            log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
-            handlingRecordExclusion();
+            printMessageToLog();
+            handlingRecordExclusionToLog();
         } else {
             throw new RuntimeException("Undefined source: " + src);
         }
@@ -113,12 +113,21 @@ public class ClientGUI extends JFrame implements ActionListener,
      * Method for handling an exception when creating and writing a file
      */
 
-    private void handlingRecordExclusion() {
+    private void handlingRecordExclusionToLog() {
         try {
             writingLogToFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Method for printing messages to the log.
+     */
+
+    private void printMessageToLog() {
+        if (tfMessage.getText().equals("")) return;
+        log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
     }
 
 }
