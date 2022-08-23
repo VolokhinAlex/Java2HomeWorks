@@ -18,12 +18,11 @@ public class Main {
         return numbersArray;
     }
 
-    private static float[] countingArrayValuesByFormula(float[] arrayNumbers) {
+    private static void countingArrayValuesByFormula(float[] arrayNumbers) {
         for (int i = 0; i < arrayNumbers.length; i++) {
             arrayNumbers[i] = (float) (arrayNumbers[i] * Math.sin(0.2f + i / 5f) * Math.cos(0.2f + i / 5f) *
                     Math.cos(0.4f + i / 2f));
         }
-        return arrayNumbers;
     }
 
     private static void workingTimeWithoutThreads(float[] numbersArray) {
@@ -31,7 +30,7 @@ public class Main {
         countingArrayValuesByFormula(numbersArray);
         long completionTime = System.currentTimeMillis();
         float deltaTime = completionTime - currentTime;
-        System.out.println("Working time without Threads: " + deltaTime + " millis");
+        System.out.println("Running time of the program in single-threaded mode: " + deltaTime + " millis");
     }
 
     private static void workingTimeWithThreads(float[] array, int halfSize) {
@@ -40,21 +39,31 @@ public class Main {
         long currentTime = System.currentTimeMillis();
 
         System.arraycopy(array, 0, firstArrayForWorkingWithThread, 0, halfSize);
-        System.arraycopy(array, 0, secondArrayForWorkingWithThread, 0, halfSize);
+        System.arraycopy(array, halfSize, secondArrayForWorkingWithThread, 0, halfSize);
 
-        new Thread(() -> {
+        Thread threadFirst = new Thread(() -> {
             countingArrayValuesByFormula(firstArrayForWorkingWithThread);
-            System.arraycopy(firstArrayForWorkingWithThread, 0, array, 0, firstArrayForWorkingWithThread.length);
-        }).start();
+            System.arraycopy(firstArrayForWorkingWithThread, 0, array, 0, halfSize);
+        });
 
-        new Thread(() -> {
+        Thread threadSecond = new Thread(() -> {
             countingArrayValuesByFormula(secondArrayForWorkingWithThread);
-            System.arraycopy(secondArrayForWorkingWithThread, 0, array, 0, secondArrayForWorkingWithThread.length);
-        }).start();
+            System.arraycopy(secondArrayForWorkingWithThread, 0, array, halfSize, halfSize);
+        });
+
+        threadFirst.start();
+        threadSecond.start();
+
+        try {
+            threadFirst.join();
+            threadSecond.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         long completionTime = System.currentTimeMillis();
         float deltaTime = completionTime - currentTime;
-        System.out.println("Working time with Threads: " + deltaTime + " millis");
+        System.out.println("Program running time in multithreading: " + deltaTime + " millis");
     }
 
 }
