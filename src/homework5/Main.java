@@ -5,9 +5,10 @@ public class Main {
     public static void main(String[] args) {
         final int SIZE = 10_000_000;
         final int HALF_SIZE = SIZE / 2;
-        float[] numbersArray = createAndFillArray(SIZE);
-        workingTimeWithoutThreads(numbersArray);
-        workingTimeWithThreads(numbersArray, HALF_SIZE);
+        float[] arrayForWorkingWithoutMultithreading = createAndFillArray(SIZE);
+        float[] arrayForWorkingWithMultithreading = createAndFillArray(SIZE);
+        workingTimeWithoutMultithreading(arrayForWorkingWithoutMultithreading);
+        workingTimeWithMultithreading(arrayForWorkingWithMultithreading, HALF_SIZE);
     }
 
     private static float[] createAndFillArray(int size) {
@@ -25,7 +26,7 @@ public class Main {
         }
     }
 
-    private static void workingTimeWithoutThreads(float[] numbersArray) {
+    private static void workingTimeWithoutMultithreading(float[] numbersArray) {
         long currentTime = System.currentTimeMillis();
         countingArrayValuesByFormula(numbersArray);
         long completionTime = System.currentTimeMillis();
@@ -33,7 +34,7 @@ public class Main {
         System.out.println("Running time of the program in single-threaded mode: " + deltaTime + " millis");
     }
 
-    private static void workingTimeWithThreads(float[] array, int halfSize) {
+    private static void workingTimeWithMultithreading(float[] array, int halfSize) {
         float[] firstArrayForWorkingWithThread = new float[halfSize];
         float[] secondArrayForWorkingWithThread = new float[halfSize];
         long currentTime = System.currentTimeMillis();
