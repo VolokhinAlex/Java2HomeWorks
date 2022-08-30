@@ -1,20 +1,22 @@
 package ru.java_two.chat_server.gui;
 
 import ru.java_two.chat_server.core.ChatServer;
+import ru.java_two.chat_server.core.ChatServerListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ServerGUI extends JFrame implements ActionListener, Thread.UncaughtExceptionHandler{
+public class ServerGUI extends JFrame implements ActionListener,
+        Thread.UncaughtExceptionHandler, ChatServerListener {
 
     private static final int POS_X = 1000;
     private static final int POS_Y = 550;
     private static final int WIDTH = 250;
     private static final int HEIGHT = 100;
 
-    private final ChatServer chatServer = new ChatServer();
+    private final ChatServer chatServer = new ChatServer(this);
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
 
@@ -65,4 +67,8 @@ public class ServerGUI extends JFrame implements ActionListener, Thread.Uncaught
         System.exit(1);
     }
 
+    @Override
+    public void onChatServerMessage() {
+
+    }
 }

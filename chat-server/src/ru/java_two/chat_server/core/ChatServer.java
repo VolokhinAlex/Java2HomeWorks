@@ -18,12 +18,18 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     private final DateFormat DATE_FORMAT = new SimpleDateFormat("[HH:mm:ss] ");
     private Vector<SocketThread> users;
 
+    private ChatServerListener listener;
+
+    public ChatServer(ChatServerListener listener) {
+        this.listener = listener;
+        users = new Vector<>();
+    }
+
     public void start(int port) {
         if (server != null && server.isAlive()) {
             System.out.println("Server already started");
         } else {
             server = new ServerSocketThread(this, "server", port, 2000);
-            users = new Vector<>();
         }
     }
 
@@ -75,30 +81,21 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
 
     @Override
     public void onSocketStart(SocketThread thread, Socket socket) {
-        users.add(thread);
         putLog("Socket created");
-//        for (int i = 0; i < users.size(); i++) {
-//            System.out.println(users.get(i));
-//        }
     }
 
     @Override
     public void onSocketStop(SocketThread thread) {
         users.remove(thread);
-        putLog("Socket stopped");
     }
 
     @Override
     public void onSocketReady(SocketThread thread, Socket socket) {
-        putLog("Socket is ready");
+        users.add(thread);
     }
 
     @Override
     public void onReceiveString(SocketThread thread, Socket socket, String msg) {
-//            thread.sendMessage(msg);
-//        for (int i = 0; i < users.size(); i++) {
-//            users.get(i).sendMessage(msg);
-//        }
         for (SocketThread user : users) {
             user.sendMessage(msg);
         }

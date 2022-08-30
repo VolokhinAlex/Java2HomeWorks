@@ -93,12 +93,8 @@ public class ClientGUI extends JFrame implements ActionListener,
             sendMessage();
         } else if (src == btnLogin) {
             connect();
-            panelTop.setVisible(false);
-            panelBottom.setVisible(true);
         } else if (src == btnDisconnect) {
             disconnect();
-            panelTop.setVisible(true);
-            panelBottom.setVisible(false);
         } else {
             throw new RuntimeException("Undefined source: " + src);
         }
@@ -192,11 +188,15 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onSocketStop(SocketThread thread) {
+        panelTop.setVisible(true);
+        panelBottom.setVisible(false);
         putLog("Socket stopped");
     }
 
     @Override
     public void onSocketReady(SocketThread thread, Socket socket) {
+        panelTop.setVisible(false);
+        panelBottom.setVisible(true);
         putLog("Socket is ready");
     }
 
