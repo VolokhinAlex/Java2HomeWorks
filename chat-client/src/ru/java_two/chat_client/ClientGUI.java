@@ -42,6 +42,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JList<String> usersList = new JList<>();
     private boolean shownIoErrors = false;
     private SocketThread socketThread;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -212,8 +213,24 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     private void formatMessage(String message) {
         String[] arrayUserData = message.split(Protocol.DELIMITER);
-        if (arrayUserData[0].equals(Protocol.TYPE_BROADCAST)) {
-            putLog(String.format("%s %s: %s", DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[2], arrayUserData[3]));
+//        if (arrayUserData[0].equals(Protocol.TYPE_BROADCAST)) {
+//            putLog(String.format("%s %s: %s", DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[2], arrayUserData[3]));
+//        } else if (arrayUserData[0].equals(Protocol.MSG_FORMAT_ERROR)) {
+//            putLog(String.format("%s %s: %s", arrayUserData[0], DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[3]));
+//            socketThread.close();
+//        } else if (arrayUserData[0].equals(Protocol.AUTH_DENIED)) {
+//            putLog(String.format("Incorrect data entered by user = %s", tfLogin.getText()));
+//        }
+        switch (arrayUserData[0]) {
+            case Protocol.TYPE_BROADCAST ->
+                    putLog(String.format("%s %s: %s", DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[2], arrayUserData[3]));
+            case Protocol.MSG_FORMAT_ERROR -> {
+                putLog(String.format("%s %s: %s", arrayUserData[0], DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[3]));
+                socketThread.close();
+            }
+            case Protocol.AUTH_DENIED ->
+                    putLog(String.format("Incorrect data entered by user = %s", tfLogin.getText()));
+            default -> putLog("Unknown Protocol Type");
         }
     }
 

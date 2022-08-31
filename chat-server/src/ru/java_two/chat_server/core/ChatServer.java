@@ -122,7 +122,6 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         String[] arrayUser = message.split(Protocol.DELIMITER);
         if (arrayUser.length != 3 || !arrayUser[0].equals(Protocol.AUTH_REQUEST)) {
             user.msgFormatError(message);
-            System.out.println("length");
             return;
         }
         String login = arrayUser[1];

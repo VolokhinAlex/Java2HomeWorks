@@ -68,7 +68,7 @@ public class ServerGUI extends JFrame implements ActionListener,
         e.printStackTrace();
         StackTraceElement[] ste = e.getStackTrace();
         String errorMessage = String.format("Exception in thread \"%s\" %s: %s\n\tat %s",
-                t.getName(),e.getClass().getCanonicalName(), e.getMessage(), ste[0]);
+                t.getName(), e.getClass().getCanonicalName(), e.getMessage(), ste[0]);
         JOptionPane.showMessageDialog(this, errorMessage, "Exception", JOptionPane.ERROR_MESSAGE);
         System.exit(1);
     }
