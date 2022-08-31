@@ -11,14 +11,17 @@ import java.awt.event.ActionListener;
 public class ServerGUI extends JFrame implements ActionListener,
         Thread.UncaughtExceptionHandler, ChatServerListener {
 
-    private static final int POS_X = 1000;
-    private static final int POS_Y = 550;
-    private static final int WIDTH = 250;
-    private static final int HEIGHT = 100;
+
+    private static final int POS_X = 800;
+    private static final int POS_Y = 200;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 300;
 
     private final ChatServer chatServer = new ChatServer(this);
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
+    private final JPanel panelTop = new JPanel(new GridLayout(1, 2));
+    private final JTextArea log = new JTextArea();
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -37,11 +40,14 @@ public class ServerGUI extends JFrame implements ActionListener,
         setResizable(false);
         setTitle("Chat Server");
         setAlwaysOnTop(true);
-        setLayout(new GridLayout(1,2));
         btnStart.addActionListener(this);
         btnStop.addActionListener(this);
-        add(btnStart);
-        add(btnStop);
+        log.setEditable(false);
+        log.setLineWrap(true);
+        panelTop.add(btnStart);
+        panelTop.add(btnStop);
+        add(panelTop, BorderLayout.NORTH);
+        add(log, BorderLayout.CENTER);
         setVisible(true);
     }
 
@@ -68,7 +74,14 @@ public class ServerGUI extends JFrame implements ActionListener,
     }
 
     @Override
-    public void onChatServerMessage() {
-
+    public void onChatServerMessage(String msg) {
+        if ("".equals(msg)) return;
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                log.append(msg + "\n");
+                log.setCaretPosition(log.getDocument().getLength());
+            }
+        });
     }
 }

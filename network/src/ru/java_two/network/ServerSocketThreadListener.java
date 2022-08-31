@@ -9,7 +9,7 @@ public interface ServerSocketThreadListener {
     void onServerStopped(ServerSocketThread thread);
     void onServerSocketCreated(ServerSocketThread thread, ServerSocket server);
     void onServerTimeout(ServerSocketThread thread, ServerSocket server);
-    void onServerAccepted(ServerSocketThread thread, ServerSocket server, Socket socket);
+    void onSocketAccepted(ServerSocketThread thread, ServerSocket server, Socket socket);
     void onServerException(ServerSocketThread thread, Throwable exception);
 
 }

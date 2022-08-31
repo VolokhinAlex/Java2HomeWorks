@@ -1,5 +1,6 @@
 package ru.java_two.chat_client;
 
+import chat_library.Protocol;
 import ru.java_two.network.SocketThread;
 import ru.java_two.network.SocketThreadListener;
 
@@ -160,18 +161,17 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     private void sendMessage() {
         String message = tfMessage.getText();
-        String username = tfLogin.getText();
         if (message.equals("") || message.trim().length() == 0) return;
         tfMessage.setText(null);
         tfMessage.grabFocus();
-        socketThread.sendMessage(String.format("%s: %s", username, message));
-        writingLogToFile(message, username);
+        socketThread.sendMessage(message);
+        writingLogToFile(tfLogin.getText(), message);
     }
 
     public void connect() {
         try {
             Socket socket = new Socket(tfIpAddress.getText(), Integer.parseInt(tfPort.getText()));
-            socketThread = new SocketThread("Client", this, socket);
+            socketThread = new SocketThread(this, "Client", socket);
         } catch (IOException e) {
             showException(Thread.currentThread(), e);
         }
@@ -198,6 +198,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         panelTop.setVisible(false);
         panelBottom.setVisible(true);
         putLog("Socket is ready");
+        socketThread.sendMessage(Protocol.getAuthRequest(tfLogin.getText(), new String(tfPassword.getPassword())));
     }
 
     @Override

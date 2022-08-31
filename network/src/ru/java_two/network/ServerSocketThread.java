@@ -29,7 +29,7 @@ public class ServerSocketThread extends Thread{
                 Socket socket;
                 try {
                     socket = server.accept();
-                    listener.onServerAccepted(this, server, socket);
+                    listener.onSocketAccepted(this, server, socket);
                 } catch (SocketTimeoutException e) {
                     listener.onServerTimeout(this, server);
                 }
