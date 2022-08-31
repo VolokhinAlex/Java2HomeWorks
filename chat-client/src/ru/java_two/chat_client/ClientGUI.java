@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class ClientGUI extends JFrame implements ActionListener,
@@ -31,6 +33,7 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JTextField tfLogin = new JTextField("Aleksey");
     private final JPasswordField tfPassword = new JPasswordField("123");
     private final JButton btnLogin = new JButton("Login");
+    private final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm");
 
     private final JPanel panelBottom = new JPanel(new BorderLayout());
     private final JButton btnDisconnect = new JButton("Disconnect");
@@ -39,7 +42,6 @@ public class ClientGUI extends JFrame implements ActionListener,
     private final JList<String> usersList = new JList<>();
     private boolean shownIoErrors = false;
     private SocketThread socketThread;
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -203,8 +205,18 @@ public class ClientGUI extends JFrame implements ActionListener,
 
     @Override
     public void onReceiveString(SocketThread thread, Socket socket, String msg) {
-        putLog(msg);
+        formatMessage(msg);
     }
+    // /bcast±1661929410637±Server±Alex connected
+    // /bcast±1661929414249±Alex±ssa
+
+    private void formatMessage(String message) {
+        String[] arrayUserData = message.split(Protocol.DELIMITER);
+        if (arrayUserData[0].equals(Protocol.TYPE_BROADCAST)) {
+            putLog(String.format("%s %s: %s", DATE_FORMAT.format(Long.parseLong(arrayUserData[1])), arrayUserData[2], arrayUserData[3]));
+        }
+    }
+
 
     @Override
     public void onSocketException(SocketThread thread, Exception exception) {

@@ -7,9 +7,7 @@ public class Protocol {
     public static final String AUTH_ACCEPT = "/auth_accept";
     public static final String AUTH_DENIED = "/auth_denied";
     public static final String MSG_FORMAT_ERROR = "/msg_format_error";
-    static final String TYPE_BROADCAST = "/bcast";
-    public static final String USER_LIST = "/user_list";
-    public static final String USER_BROADCAST = "/user_bcast";
+    public static final String TYPE_BROADCAST = "/bcast";
 
     public static String getAuthRequest(String login, String password) {
         return AUTH_REQUEST + DELIMITER + login + DELIMITER + password;
