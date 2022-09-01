@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class ChatServer implements ServerSocketThreadListener, SocketThreadListener {
@@ -134,6 +135,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         }
         user.authAccept(nickname);
         sendToAllAuthorizedClients(Protocol.getTypeBroadcast("Server", nickname + " connected"));
+        sendToAllAuthorizedClients(Protocol.getUserList(getUsers().toString()));
     }
 
     private void sendToAllAuthorizedClients(String msg) {
@@ -142,6 +144,15 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
             if (!recipient.isAuthorized()) continue;
             recipient.sendMessage(msg);
         }
+    }
+
+    public StringBuilder getUsers() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (SocketThread user : users) {
+            ClientThread client = (ClientThread) user;
+            stringBuilder.append(client.getNickname() + Protocol.DELIMITER);
+        }
+        return stringBuilder;
     }
 
 }

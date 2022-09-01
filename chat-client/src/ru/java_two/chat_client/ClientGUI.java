@@ -61,10 +61,7 @@ public class ClientGUI extends JFrame implements ActionListener,
         log.setLineWrap(true);
         JScrollPane scrollLog = new JScrollPane(log);
         JScrollPane scrollUsers = new JScrollPane(usersList);
-        String[] users = {"user1", "user2", "user3", "user4"};
-
-        usersList.setListData(users);
-        usersList.setPreferredSize(new Dimension(100, 0));
+        scrollUsers.setPreferredSize(new Dimension(100, 0));
         panelTop.add(tfIpAddress);
         panelTop.add(tfPort);
         panelTop.add(cbAlwaysOnTop);
@@ -207,9 +204,8 @@ public class ClientGUI extends JFrame implements ActionListener,
     @Override
     public void onReceiveString(SocketThread thread, Socket socket, String msg) {
         formatMessage(msg);
+//        System.out.println(msg);
     }
-    // /bcast±1661929410637±Server±Alex connected
-    // /bcast±1661929414249±Alex±ssa
 
     private void formatMessage(String message) {
         String[] arrayUserData = message.split(Protocol.DELIMITER);
@@ -230,6 +226,11 @@ public class ClientGUI extends JFrame implements ActionListener,
             }
             case Protocol.AUTH_DENIED ->
                     putLog(String.format("Incorrect data entered by user = %s", tfLogin.getText()));
+            case Protocol.USER_LIST -> {
+                message = message.replace(Protocol.USER_LIST, "");
+                String[] user = message.split(Protocol.DELIMITER);
+                usersList.setListData(user);
+            }
             default -> putLog("Unknown Protocol Type");
         }
     }

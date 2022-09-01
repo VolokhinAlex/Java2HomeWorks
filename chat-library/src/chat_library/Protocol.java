@@ -2,12 +2,13 @@ package chat_library;
 
 public class Protocol {
 
-    public static final String DELIMITER = "±"; //alt+num0177
+    public static final String DELIMITER = "±";
     public static final String AUTH_REQUEST = "/auth_request";
     public static final String AUTH_ACCEPT = "/auth_accept";
     public static final String AUTH_DENIED = "/auth_denied";
     public static final String MSG_FORMAT_ERROR = "/msg_format_error";
     public static final String TYPE_BROADCAST = "/bcast";
+    public static final String USER_LIST = "/users";
 
     public static String getAuthRequest(String login, String password) {
         return AUTH_REQUEST + DELIMITER + login + DELIMITER + password;
@@ -28,5 +29,9 @@ public class Protocol {
 
     public static String getMsgFormatError(String message) {
         return  MSG_FORMAT_ERROR + DELIMITER + message;
+    }
+
+    public static String getUserList(String nickname) {
+        return USER_LIST + DELIMITER + nickname;
     }
 }
